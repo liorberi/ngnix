@@ -13,16 +13,7 @@ provider "aws" {
   region  = "us-west-2"
 }
 
-resource "aws_instance" "app_server" {
-  ami           = "ami-830c94e3"
-  instance_type = "t2.micro"
-
-  tags = {
-    Name = "ExampleAppServerInstance"
-  }
-}
-
-
+#creating VPC 
 resource "aws_vpc" "nginx-vpc" {
   cidr_block           = "10.0.0.0/16"
   enable_dns_support   = "true"
@@ -30,6 +21,8 @@ resource "aws_vpc" "nginx-vpc" {
   enable_classiclink   = "false"
   instance_tenancy     = "default"
 }
+
+#Create a public subnet for the VPC we created above
 
 resource "aws_subnet" "prod-subnet-public-1" {
   vpc_id                  = aws_vpc.nginx-vpc.id // Referencing the id of the VPC from abouve code block
@@ -79,7 +72,7 @@ ingress {
     from_port = 22
     to_port   = 22
     protocol  = "tcp"
-cidr_blocks = ["0.0.0.0/0"] // Ideally best to use your machines' IP. However if it is dynamic you will need to change this in the vpc every so often. 
+cidr_blocks = ["0.0.0.0/0"] // Ideally best to use your machines' IP. However if it is dynamic you will need to change this in the vpc every so often.
   }
 ingress {
     from_port   = 80
@@ -96,12 +89,22 @@ ingress {
 resource "aws_key_pair" "aws-key" {
   key_name   = "aws-key"
   public_key = file(var.PUBLIC_KEY_PATH)// Path is in the variables file}
- } 
+ }
+  
 resource "aws_instance" "nginx_server" {
   ami           = "ami-08d70e59c07c61a3a"
   instance_type = "t2.micro"
 tags = {
     Name = "nginx_server"
+  }
+  
+   }
+  
+resource "aws_instance" "nginx_server2" {
+  ami           = "ami-08d70e59c07c61a3a"
+  instance_type = "t2.micro"
+tags = {
+    Name = "nginx_server2"
   }
 # VPC
   subnet_id = aws_subnet.prod-subnet-public-1.id
@@ -196,5 +199,4 @@ variable "certificate_arn" {
   description = "Certificate ARN for the HTTPS listener"
   default     = null
 }
-
 
