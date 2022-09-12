@@ -1,4 +1,41 @@
-installation:
+
+# Architecture:
+
+
+
+
+Design and implement an isolated and private environment with the
+following main components:
+1. Ec2 with Nginx (deployed by ngninx.sh script)
+2. ASG for the EC2 with a 2 instances. 
+3. Application Load Balancer with the ec2 as listeners.
+Public IPs are prohibited, and all the components or services are
+required to be exposed privately. Make sure to allocate it only where
+it’s necessary.
+Assumptions and conditions:
+1. All resources can access the internet without any restrictions
+(egress traffic only).
+2. The implementation ismade by Terraform 
+
+
+#############################################
+## terraform will configure ## :
+
+# creating VPC 
+# Create a public subnet for the VPC we created above
+# Create an Internet Gateway for the VPC. The VPC require an IGW to communicate over the internet.
+# Create a custom route table for the VPC.
+# Associate the route table with the public subnet.
+# Create a security group to allow SSH access and HTTP access.
+# Add the following code block in the main.tf file to associate an SSH public key with the AWS EC2 instance.
+# Setting up the ssh connection to install the nginx server
+# Create Load balancer listener 
+
+
+==============================================================
+
+
+# installation:
 
 Install Terraform on Ubuntu 22.04:
 
@@ -134,17 +171,6 @@ clone this repo to your machine and run terraform
 ===========================================
 
 
-## terraform will configure ## :
-
-# creating VPC 
-# Create a public subnet for the VPC we created above
-# Create an Internet Gateway for the VPC. The VPC require an IGW to communicate over the internet.
-# Create a custom route table for the VPC.
-# Associate the route table with the public subnet.
-# Create a security group to allow SSH access and HTTP access.
-# Add the following code block in the main.tf file to associate an SSH public key with the AWS EC2 instance.
-# Setting up the ssh connection to install the nginx server
-# Create Load balancer listener 
 
 
 
