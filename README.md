@@ -127,3 +127,26 @@ connect ubuntu machine to AWS
 
 ===================================================
 
+step 3:
+
+clone this repo to your machine and run terraform
+
+===========================================
+
+
+## terraform will configure ## :
+
+# creating VPC 
+# Create a public subnet for the VPC we created above
+# Create an Internet Gateway for the VPC. The VPC require an IGW to communicate over the internet.
+# Create a custom route table for the VPC.
+# Associate the route table with the public subnet.
+# Create a security group to allow SSH access and HTTP access.
+# Add the following code block in the main.tf file to associate an SSH public key with the AWS EC2 instance.
+# Setting up the ssh connection to install the nginx server
+# Create Load balancer listener 
+
+
+
+
+
