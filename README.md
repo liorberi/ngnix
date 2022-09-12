@@ -5,16 +5,20 @@
 1. Ec2 with Nginx (deployed by ngninx.sh script)
 2. ASG for the EC2 with a 2 instances. 
 3. Application Load Balancer with the ec2 as listeners.
-Public IPs are prohibited, and all the components or services are
-required to be exposed privately. Make sure to allocate it only where
-it’s necessary.
+
 Assumptions and conditions:
+
 1. All resources can access the internet without any restrictions
 (egress traffic only).
 2. The implementation ismade by Terraform 
 
-
+# requirments:
+AWS ACCOUNT
+TERRAFORM INSTALLED
+GITHUB ACCOUNT
 #############################################
+
+
 ## terraform will configure ## :
 
 # creating VPC 
@@ -166,6 +170,7 @@ clone this repo to your machine and run terraform
 
 ===========================================
 
+## All the steps explained in main.tf file ##
 
 
 
