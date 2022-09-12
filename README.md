@@ -2,10 +2,6 @@
 # Architecture:
 
 
-
-
-Design and implement an isolated and private environment with the
-following main components:
 1. Ec2 with Nginx (deployed by ngninx.sh script)
 2. ASG for the EC2 with a 2 instances. 
 3. Application Load Balancer with the ec2 as listeners.
