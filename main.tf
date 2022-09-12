@@ -100,12 +100,7 @@ tags = {
   
    }
   
-resource "aws_instance" "nginx_server2" {
-  ami           = "ami-08d70e59c07c61a3a"
-  instance_type = "t2.micro"
-tags = {
-    Name = "nginx_server2"
-  }
+ 
 # VPC
   subnet_id = aws_subnet.prod-subnet-public-1.id
 # Security Group
@@ -198,5 +193,17 @@ variable "lb_https_listener_port" {
 variable "certificate_arn" {
   description = "Certificate ARN for the HTTPS listener"
   default     = null
+}
+
+###########################
+
+## Auto Scaling group
+
+resource "aws_autoscaling_group" "nginx_server" {
+  min_size             = 1
+  max_size             = 3
+  desired_capacity     = 1
+  launch_configuration = aws_launch_configuration.nginx_server.name
+  vpc_zone_identifier  = module.vpc.public_subnets
 }
 
